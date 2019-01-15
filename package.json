@@ -1,0 +1,22 @@
+{
+  "name": "vilanda",
+  "version": "1.0.0",
+  "description": "todolist",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lamborshea/vilanda.git"
+  },
+  "keywords": [
+    "todolist"
+  ],
+  "author": "lamborshea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lamborshea/vilanda/issues"
+  },
+  "homepage": "https://github.com/Lamborshea/vilanda#readme"
+}
