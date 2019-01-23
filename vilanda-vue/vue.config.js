@@ -45,7 +45,7 @@ module.exports = {
     const externals = {
       vue: "Vue",
       vant: "vant",
-      "ant-design-vue": "Antd",
+      "ant-design-vue": "antd",
       // "vue-router": "VueRouter",
       // vuex: "Vuex",
       // axios: "axios",
