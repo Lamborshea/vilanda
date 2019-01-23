@@ -4,10 +4,20 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+import Antd from "ant-design-vue";
+import "ant-design-vue/dist/antd.css";
+Vue.use(Antd);
+
+import Vant from "vant";
+import "vant/lib/index.css";
+Vue.use(Vant);
+
 Vue.config.productionTip = false;
 
-new Vue({
+const vm = new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app");
+}).$mount("#vilanda");
+
+export default vm;

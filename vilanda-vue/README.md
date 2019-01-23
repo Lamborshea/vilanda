@@ -1,6 +1,6 @@
 # vilanda-vue
 
-this project is running at http://localhost: 8002
+this project is running at http://localhost: 4002
 
 ## Project setup
 

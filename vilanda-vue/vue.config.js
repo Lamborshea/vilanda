@@ -13,32 +13,48 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 module.exports = {
-  publicPath: "/vue/",
+  publicPath: "/",
   outputDir: "dist",
   assetsDir: "static",
   lintOnSave: true,
   pages: undefined,
   filenameHashing: true,
-  runtimeCompiler: false,
+  runtimeCompiler: true,
   devServer: {
     open: true,
     host: "0.0.0.0",
-    port: 8002,
+    port: 4002,
     https: false,
     hotOnly: true
   },
+  css: {
+    loaderOptions: {
+      postcss: {
+        exclude: "node_modules",
+        "postcss-pxtorem": {
+          rootValue: 75,
+          unitPrecision: 5,
+          propList: ["*", "!font-size", "!line-height"],
+          selectorBlackList: [],
+          minPixelValue: 12
+        }
+      }
+    }
+  },
   configureWebpack: function(config) {
     const externals = {
-      // vue: "Vue",
+      vue: "Vue",
+      vant: "vant",
+      "ant-design-vue": "Antd",
       // "vue-router": "VueRouter",
       // vuex: "Vuex",
       // axios: "axios",
       // echarts: "echarts",
-      // moment: "moment",
+      moment: "moment"
       // iview: "iview",
       // "vue2-editor": "vue2-editor",
       // mock: "mockjs",
-      AMap: "AMap"
+      // AMap: "AMap"
     };
     var happyPack = new HappyPack({
       id: "babel",
@@ -83,6 +99,7 @@ module.exports = {
     }
   },
   chainWebpack: function(config) {
+    // console.log(config.module);
     config.resolve.alias
       .set("layout", resolve("src/layout"))
       .set("assets", resolve("src/assets"))
@@ -97,17 +114,21 @@ module.exports = {
           ],
           js: [
             // "https://cdn.bootcss.com/echarts/4.2.0-rc.1/echarts.min.js",
-            "https://webapi.amap.com/maps?v=1.4.12&key=116ddd9ab4ec63dc4f3fcdaf9503feec"
+            // "https://webapi.amap.com/maps?v=1.4.12&key=116ddd9ab4ec63dc4f3fcdaf9503feec"
           ]
         },
         // 生产环境
         build: {
           css: [
+            "//cdn.jsdelivr.net/npm/vant@1.5/lib/index.css",
+            "//cdn.jsdelivr.net/npm/ant-design-vue@1.3.2/dist/antd.min.css"
             // "//unpkg.com/iview/dist/styles/iview.css"
           ],
           js: [
-            // "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js",
-            // "https://cdn.bootcss.com/vue/2.5.17/vue.min.js",
+            "//cdn.bootcss.com/vue/2.5.17/vue.min.js",
+            "//cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js",
+            "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js",
+            "//cdn.jsdelivr.net/npm/ant-design-vue@1.3.2/dist/antd.min.js"
             // "https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js",
             // "https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js",
             // "https://cdn.bootcss.com/axios/0.18.0/axios.min.js",
@@ -116,7 +137,7 @@ module.exports = {
             // // "http://mockjs.com/dist/mock.js",
             // "https://cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js",
             // "https://cdn.bootcss.com/echarts/4.2.0-rc.1/echarts.min.js",
-            "https://webapi.amap.com/maps?v=1.4.12&key=116ddd9ab4ec63dc4f3fcdaf9503feec"
+            // "https://webapi.amap.com/maps?v=1.4.12&key=116ddd9ab4ec63dc4f3fcdaf9503feec"
           ]
         }
       };
