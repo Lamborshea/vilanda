@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <van-nav-bar title="主页" left-text right-text/>
+    <van-cell-group>
+      <van-cell title="网易云音乐" is-link to="/music"/>
+      <van-cell title="YouTube" is-link to="/video"/>
+    </van-cell-group>
   </div>
 </template>
 

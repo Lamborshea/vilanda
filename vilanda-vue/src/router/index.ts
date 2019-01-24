@@ -1,6 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
-
+import todolist from "@/router/modules/todolist";
+import wechat from "@/router/modules/wechat";
+import blog from "@/router/modules/blog";
+import search from "@/router/modules/search";
+import settings from "@/router/modules/settings";
+import music from "@/router/modules/music";
+import video from "@/router/modules/video";
 Vue.use(Router);
 
 export default new Router({
@@ -8,22 +14,20 @@ export default new Router({
     {
       path: "/",
       name: "home",
+      alias: "index",
       meta: {
         title: "主页",
         isShowTabbar: true
       },
       component: () => import("@/views/Home.vue")
     },
-    {
-      path: "/todo",
-      name: "todo",
-      meta: {
-        title: "vilanda-todolist",
-        isShowTabbar: true
-      },
-      component: () =>
-        import(/* webpackChunkName: "todolist" */ "@/views/TodoList.vue")
-    },
+    ...todolist,
+    ...wechat,
+    ...blog,
+    ...search,
+    ...settings,
+    ...video,
+    ...music,
     {
       path: "/about",
       name: "about",

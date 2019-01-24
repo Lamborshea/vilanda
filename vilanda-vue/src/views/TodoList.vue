@@ -45,17 +45,33 @@
  * @author 谢南波
  */
 import { Vue, Component, Prop, Model, Watch } from "vue-property-decorator";
-import { State, Getter, Action, Mutation } from "vuex-class";
+import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import Http from "@/api/Http";
 import * as Code from "@/api/Code";
 import Url from "@/api/Url";
 import Request from "@/api/Request";
+import * as TodoTypes from "@/store/modules/todo/mutation_types";
+import { TodoEnum } from "@/enum/todolist";
 @Component({
   components: {}
 })
-export default class App extends Vue {
-  listData = [];
+export default class TodoList extends Vue {
   addDataTitle = "";
+
+  @Getter(TodoTypes.GET_TODO_LIST, { namespace: TodoEnum.storeModule })
+  listData!: Array<any>;
+
+  @Action(TodoTypes.FETCH_TODO_LIST, { namespace: TodoEnum.storeModule })
+  fetchTodoList: any;
+
+  @Action(TodoTypes.ADD_TODO, { namespace: TodoEnum.storeModule })
+  addTodo: any;
+
+  @Action(TodoTypes.UPDATE_TODO, { namespace: TodoEnum.storeModule })
+  updateTodo: any;
+
+  @Action(TodoTypes.DELETE_TODO, { namespace: TodoEnum.storeModule })
+  deleteTodo: any;
 
   onClose(data: any) {
     return (clickPosition: String, instance: { close: Function }) => {
@@ -77,8 +93,8 @@ export default class App extends Vue {
               message: `确定删除${data.title}吗？`
             })
             .then(() => {
-              Request.todolist.deleteData(data._id).then(() => {
-                this.getListData().then(() => {
+              this.deleteTodo(data._id).then(() => {
+                this.fetchTodoList().then(() => {
                   instance.close();
                 });
               });
@@ -88,33 +104,21 @@ export default class App extends Vue {
     };
   }
 
-  async getData() {
-    const response = await Http.post(Url.todolist.getTodo);
-    const result = response.data;
-    return result;
-  }
-
   handleChangeCheckbox(item: any) {
-    Request.todolist.updateData(item._id, item.checked).then(() => {
-      this.getListData();
+    this.updateTodo(item).then(() => {
+      this.fetchTodoList();
     });
   }
 
   handleSubmitAdd() {
-    Request.todolist.addData(this.addDataTitle).then(() => {
+    this.addTodo(this.addDataTitle).then(() => {
       this.addDataTitle = "";
-      this.getListData();
-    });
-  }
-
-  async getListData() {
-    await this.getData().then((result: any) => {
-      this.listData = result.data;
+      this.fetchTodoList();
     });
   }
 
   created() {
-    this.getListData();
+    this.fetchTodoList();
   }
 }
 </script>

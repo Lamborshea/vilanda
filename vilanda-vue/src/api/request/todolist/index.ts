@@ -1,6 +1,17 @@
 import Http from "@/api/Http";
 import * as Code from "@/api/Code";
 import Url from "@/api/Url";
+
+async function getData() {
+  try {
+    const response = await Http.post(Url.todolist.getTodo);
+    const result = response.data;
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
 async function addData(title: string) {
   try {
     const response = await Http.post(Url.todolist.addTodo, {
@@ -51,6 +62,7 @@ async function deleteData(_id: string) {
 }
 
 export default {
+  getData,
   addData,
   updateData,
   deleteData

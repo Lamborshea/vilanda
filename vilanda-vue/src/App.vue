@@ -7,10 +7,10 @@
       <a-layout-footer class="l-footer" v-show="$route.meta.isShowTabbar">
         <van-tabbar v-model="active">
           <van-tabbar-item icon="certificate" :to="{name: 'todo'}">todo</van-tabbar-item>
-          <van-tabbar-item icon="search">Search</van-tabbar-item>
-          <van-tabbar-item icon="home-o">Home</van-tabbar-item>
-          <van-tabbar-item icon="friends-o">Contact</van-tabbar-item>
-          <van-tabbar-item icon="setting-o">Settings</van-tabbar-item>
+          <van-tabbar-item icon="search" :to="{name: 'search'}">Search</van-tabbar-item>
+          <van-tabbar-item icon="home-o" :to="{name: 'home'}">Home</van-tabbar-item>
+          <van-tabbar-item icon="friends-o" :to="{name: 'wechat'}">wechat</van-tabbar-item>
+          <van-tabbar-item icon="setting-o" :to="{name: 'settings'}">Settings</van-tabbar-item>
         </van-tabbar>
       </a-layout-footer>
     </a-layout>
