@@ -3,7 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="viewport" content="user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1"
+    />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <!-- 使用 CDN 加速的 CSS 文件，配置在 vue.config.js 下 -->
     <% for (var i in
@@ -35,6 +39,18 @@
     </noscript>
     <div id="vilanda"></div>
     <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
+    <script src="<%= BASE_URL %>js/fastclick.js"></script>
+    <script>
+      if ("addEventListener" in document) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          function() {
+            FastClick.attach(document.body);
+          },
+          false
+        );
+      }
+    </script>
     <% for (var i in
     htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
     <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
