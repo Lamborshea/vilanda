@@ -21,8 +21,5 @@ import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 export default class Home extends Vue {}
 </script>
 <style lang="scss">
-.home {
-  text-align: center;
-}
 </style>
 
