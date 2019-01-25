@@ -64,47 +64,40 @@ export default class Http {
    * @param toJsonFlag:是否转json
    * @returns {Promise<AxiosResponse<any>>}
    */
-  static postFile = (url: string, data: any, toJsonFlag: boolean) => {
-    let params: any = new FormData();
-    data.template = "";
-    for (let key in data) {
-      if (key == "attach") {
-        let attachFileName = [];
-        for (let i = 0; i < data[key].length; i++) {
-          attachFileName.push(data[key][i].name);
-          params.append(key, data[key][i]);
-        }
-        params.append("attachFileName", attachFileName);
-      } else {
-        if (toJsonFlag) {
-          data[key] = JSON.stringify(data[key]);
-        }
-        params.append(key, data[key]);
-      }
-    }
+  static postFile = (url: string, data: any) => {
+    // let params: any = new FormData();
+    // for (let key in data) {
+    //   if (key == "attach") {
+    //     let attachFileName = [];
+    //     for (let i = 0; i < data[key].length; i++) {
+    //       attachFileName.push(data[key][i].name);
+    //       params.append(key, data[key][i]);
+    //     }
+    //     params.append("attachFileName", attachFileName);
+    //   } else {
+    //     params.append(key, data[key]);
+    //   }
+    // }
 
-    for (let key in data) {
-      if (typeof data[key] == "string") {
-        data[key] = data[key].trim();
-      }
-    }
-    delete data["template"];
+    // for (let key in data) {
+    //   if (typeof data[key] == "string") {
+    //     data[key] = data[key].trim();
+    //   }
+    // }
 
     return axios({
       method: "post",
       url: url,
-      data: params,
-      params: [],
+      data: data,
       timeout: 30000,
       xhrFields: {
-        withCredentials: true
+        withCredentials: false
       },
-      withCredentials: true,
+      withCredentials: false,
       //end 处理跨域代码
       headers: {
         "X-Requested-With": "XMLHttpRequest",
-        "Access-Control-Allow-Headers": "token",
-        "Content-Type": "multipart/form-data"
+        "Access-Control-Allow-Headers": "token"
       }
     });
   };

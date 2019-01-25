@@ -36,6 +36,7 @@ import Http from "@/api/Http";
 import * as Code from "@/api/Code";
 import Url from "@/api/Url";
 import Request from "@/api/Request";
+import * as userTypes from "@/store/modules/user/types";
 import md5 from "md5";
 @Component({
   components: {}
@@ -46,11 +47,17 @@ export default class Login extends Vue {
     password: ""
   };
 
+  @Action(userTypes.LOGIN, { namespace: "user" })
+  login!: Function;
+
   handleLogin() {
     let username = this.user.username;
     let password = md5(this.user.password);
-    Request.login.login(username, password).then((result: any) => {
-      this.$toast("登录成功");
+    this.login({ username, password }).then((status: any) => {
+      if (status) {
+        this.$toast("登录成功");
+        this.$router.push("/");
+      }
     });
   }
 }

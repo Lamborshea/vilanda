@@ -1,6 +1,18 @@
 <template>
-  <div>
-    <van-cell-group>
+  <div class="view-settings">
+    <div class="avatar-container">
+      <div class="user-info">{{userinfo.username}}</div>
+      <Avatar @click.native="handleUpload"></Avatar>
+      <input
+        id="js-vilanda-avatar-input"
+        name="attachFileName"
+        style="display:none"
+        @change="handleChange"
+        type="file"
+        accept="image/*"
+      >
+    </div>
+    <van-cell-group class="cell-panel">
       <van-cell title="登录" is-link to="/login"/>
       <van-cell title="注册" is-link to="/register"/>
     </van-cell-group>
@@ -13,10 +25,49 @@
  */
 import { Vue, Component, Prop, Model, Watch } from "vue-property-decorator";
 import { State, Getter, Action, Mutation } from "vuex-class";
+import Avatar from "@/components/user/Avatar.vue";
+import Http from "@/api/Http";
 @Component({
-  components: {}
+  components: {
+    Avatar
+  }
 })
-export default class App extends Vue {}
+export default class Settings extends Vue {
+  @Getter("getUserInfo", { namespace: "user" })
+  userinfo!: any;
+
+  handleUpload() {
+    const inputEl: HTMLElement | null = document.getElementById(
+      "js-vilanda-avatar-input"
+    );
+    console.log();
+
+    if (inputEl) {
+      inputEl.click();
+    }
+  }
+  handleChange(e: any) {
+    const files = e.target.files;
+    Http.postFile("/upload/multer", files);
+  }
+}
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+.avatar-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  margin: 16px 8px 0;
+  background-color: #fff;
+  .user-info {
+    height: 64px;
+    line-height: 64px;
+    font-size: 20px;
+  }
+}
+.view-settings {
+  .cell-panel {
+    margin-top: 16px;
+  }
+}
 </style>

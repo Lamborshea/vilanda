@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const vueDistPath = path.resolve(__dirname, "../vilanda-vue/dist/");
 const todolist = require("./routes/todolist");
 const loginRoutes = require("./routes/login");
+const uploadRoutes = require("./routes/base/upload");
 
 app.use(express.static(vueDistPath));
 app.use(bodyParser.json());
@@ -42,7 +43,7 @@ app.get("/", function(req, res, next) {
 
 app.use("/todolist", todolist);
 app.use("/login", loginRoutes);
-
+app.use("/upload", uploadRoutes);
 app.listen(config.port, () =>
   console.log(`vilanda-express app listening on port ${config.port}!`)
 );

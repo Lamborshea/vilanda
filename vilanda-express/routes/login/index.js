@@ -4,7 +4,7 @@ const router = express.Router();
 const Code = require("../../constants/error_code_constant");
 const Msg = require("../../constants/message_constant");
 const User = require("../../models/user");
-router.all("/", (req, res, next) => {
+router.post("/", (req, res, next) => {
   const requestBody = req.body;
   if (requestBody.username && requestBody.password) {
     User.findOne(
@@ -14,7 +14,16 @@ router.all("/", (req, res, next) => {
       },
       (err, result) => {
         if (err) console.log(err);
-        console.log(result);
+        res.json({
+          code: Code.SUCCESS,
+          data: {
+            username: result.username,
+            _id: result._id,
+            avatar: result.avatar
+          },
+          msg: Msg.SUCCESS
+        });
+        next();
       }
     );
   } else {
@@ -27,7 +36,7 @@ router.all("/", (req, res, next) => {
   }
 });
 
-router.all("/register", (req, res, next) => {
+router.post("/register", (req, res, next) => {
   const requestBody = req.body;
   if (requestBody.username && requestBody.password) {
     let user = new User({
@@ -64,8 +73,9 @@ router.all("/register", (req, res, next) => {
   }
 });
 
-router.post("/users", (req, res, next) => {
-  User.find({}, (err, result) => {
+router.get("/users", (req, res, next) => {
+  User.find({}, (error, result) => {
+    if (error) console.log(error);
     res.json({
       code: Code.SUCCESS,
       data: result,

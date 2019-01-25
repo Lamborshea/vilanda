@@ -7,20 +7,20 @@
           clearable
           label="username"
           left-icon="contact"
-          icon="question-o"
           placeholder="phone | email "
           @click-icon="$toast('question')"
         />
 
         <van-field
-          left-icon="closed-eye"
           v-model="user.password"
+          left-icon="closed-eye"
           type="password"
           label="password"
+          clearable
         />
       </van-cell-group>
       <div class="login-btn-wrapper">
-        <a-button type="primary" @click="handleLogin" block>login</a-button>
+        <a-button type="primary" @click="handleRegister" block>Register</a-button>
       </div>
     </div>
   </div>
@@ -37,6 +37,8 @@ import * as Code from "@/api/Code";
 import Url from "@/api/Url";
 import Request from "@/api/Request";
 import md5 from "md5";
+import * as userTypes from "@/store/modules/user/types";
+
 @Component({
   components: {}
 })
@@ -46,11 +48,17 @@ export default class Login extends Vue {
     password: ""
   };
 
-  handleLogin() {
+  @Action(userTypes.REGISTER, { namespace: "user" })
+  register!: Function;
+
+  handleRegister() {
     let username = this.user.username;
     let password = md5(this.user.password);
-    Request.login.login(username, password).then((result: any) => {
-      this.$toast("注册成功");
+    this.register({ username, password }).then((status: any) => {
+      if (status) {
+        this.$toast("注册成功");
+        this.$router.push("/login");
+      }
     });
   }
 }

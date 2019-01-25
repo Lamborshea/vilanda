@@ -9,8 +9,8 @@ import { AxiosRequestConfig, AxiosResponse } from "axios";
  * @param { Object } config
  */
 export const requestInterceptor = (config: AxiosRequestConfig) => {
-  console.log("requestInterceptor");
-  console.log(config);
+  // console.log("requestInterceptor");
+  // console.log(config);
 
   return config;
 };
@@ -20,8 +20,8 @@ export const requestInterceptor = (config: AxiosRequestConfig) => {
  * @param { Object } error
  */
 export const requestErrorInterceptor = (error: any) => {
-  console.log("requestErrorInterceptor");
-  console.log(error);
+  // console.log("requestErrorInterceptor");
+  // console.log(error);
   return Promise.reject(error);
 };
 
@@ -30,8 +30,8 @@ export const requestErrorInterceptor = (error: any) => {
  *
  */
 export const responseInterceptor = (response: AxiosResponse) => {
-  console.log("responseInterceptor");
-  console.log(response);
+  // console.log("responseInterceptor");
+  // console.log(response);
 
   return response;
 };
@@ -41,8 +41,8 @@ export const responseInterceptor = (response: AxiosResponse) => {
  * @param error 响应错误对象
  */
 export const responseErrorInterceptor = (error: any) => {
-  console.log("responseErrorInterceptor");
-  console.log(error);
+  // console.log("responseErrorInterceptor");
+  // console.log(error);
   error = handleError(error);
   return Promise.reject(error);
 };

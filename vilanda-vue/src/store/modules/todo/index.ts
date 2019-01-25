@@ -9,7 +9,7 @@ import {
 } from "vuex";
 import { ToDoState } from "@/store/modules/todo/interface";
 import { RootState } from "@/store/interface";
-import * as types from "@/store/modules/todo/mutation_types";
+import * as types from "@/store/modules/todo/types";
 import Http from "@/api/Http";
 import * as Code from "@/api/Code";
 import Url from "@/api/Url";

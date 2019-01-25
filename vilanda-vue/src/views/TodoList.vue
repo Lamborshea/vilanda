@@ -50,7 +50,7 @@ import Http from "@/api/Http";
 import * as Code from "@/api/Code";
 import Url from "@/api/Url";
 import Request from "@/api/Request";
-import * as TodoTypes from "@/store/modules/todo/mutation_types";
+import * as TodoTypes from "@/store/modules/todo/types";
 import { TodoEnum } from "@/enum/todolist";
 @Component({
   components: {}
