@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <van-cell-group>
-      <van-cell title="登录" is-link to="/login"/>
-      <van-cell title="注册" is-link to="/register"/>
-    </van-cell-group>
-  </div>
+  <div>tmall</div>
 </template>
 <script lang="ts">
 /**

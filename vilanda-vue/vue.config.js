@@ -20,6 +20,7 @@ module.exports = {
   pages: undefined,
   filenameHashing: true,
   runtimeCompiler: true,
+  productionSourceMap: false,
   devServer: {
     open: true,
     host: "0.0.0.0",
@@ -111,6 +112,7 @@ module.exports = {
         dev: {
           css: [
             // "//unpkg.com/iview/dist/styles/iview.css"
+            "//cdn.jsdelivr.net/npm/ant-design-vue@1.3.2/dist/antd.min.css"
           ],
           js: [
             // "https://cdn.bootcss.com/echarts/4.2.0-rc.1/echarts.min.js",

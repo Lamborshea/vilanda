@@ -4,6 +4,11 @@
     <van-cell-group>
       <van-cell title="网易云音乐" is-link to="/music"/>
       <van-cell title="YouTube" is-link to="/video"/>
+      <van-cell title="Tmall" is-link to="/airbnb"/>
+      <van-cell title="Kindle" is-link to="/kindle"/>
+      <van-cell title="Weather" is-link to="/weather"/>
+      <van-cell title="Airbnb" is-link to="/airbnb"/>
+      <van-cell title="Google" is-link url="https://google.xienanbo.com"/>
     </van-cell-group>
   </div>
 </template>

@@ -19,7 +19,7 @@ async function addData(title: string) {
     });
     const result = response.data;
     if (result.code === Code.SUCCESS) {
-      return true;
+      return result;
     } else {
       return false;
     }
@@ -52,7 +52,7 @@ async function deleteData(_id: string) {
     });
     const result = response.data;
     if (result.code === Code.SUCCESS) {
-      return true;
+      return result;
     } else {
       return false;
     }

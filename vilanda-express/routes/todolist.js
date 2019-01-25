@@ -4,15 +4,15 @@ const router = express.Router();
 const Todo = require("../models/todo.js");
 const Code = require("../constants/error_code_constant");
 const Msg = require("../constants/message_constant");
-router.all("/", function(req, res, next) {
+router.all("/", (req, res, next) => {
   res.json({
     data: "/todolist"
   });
   next();
 });
 
-router.all("/all", function(req, res, next) {
-  Todo.find({}, function(err, result) {
+router.all("/all", (req, res, next) => {
+  Todo.find({}, (err, result) => {
     console.log(err);
     console.log(result);
     res.json({
@@ -24,14 +24,19 @@ router.all("/all", function(req, res, next) {
   });
 });
 
-router.post("/add", function(req, res, next) {
+router.post("/add", (req, res, next) => {
   const requestBody = req.body;
   if (requestBody.title) {
     let todo = new Todo({
       title: requestBody.title
     });
-    todo.save(function(err, result) {
+    todo.save((err, result) => {
       if (err) {
+        res.json({
+          code: Code.SYSTEM_EROOR,
+          data: err,
+          msg: Msg.SYSTEM_EROOR
+        });
         next();
       } else {
         res.json({
@@ -52,7 +57,7 @@ router.post("/add", function(req, res, next) {
   }
 });
 
-router.post("/update", function(req, res, next) {
+router.post("/update", (req, res, next) => {
   const requestBody = req.body;
   if (requestBody._id) {
     Todo.findByIdAndUpdate(
@@ -87,10 +92,10 @@ router.post("/update", function(req, res, next) {
   }
 });
 
-router.post("/delete", function(req, res, next) {
+router.post("/delete", (req, res, next) => {
   const requestBody = req.body;
   if (requestBody._id) {
-    Todo.findByIdAndRemove(requestBody._id, function(err, result) {
+    Todo.findByIdAndRemove(requestBody._id, (err, result) => {
       if (err) {
         res.json({
           code: Code.SYSTEM_ERROR,

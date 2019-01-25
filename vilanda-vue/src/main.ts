@@ -16,7 +16,10 @@ Vue.config.productionTip = false;
 const vm = new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    store.dispatch("todo/fetchTodoList");
+  }
 }).$mount("#vilanda");
 
 export default vm;

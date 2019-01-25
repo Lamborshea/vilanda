@@ -77,27 +77,24 @@ export default class TodoList extends Vue {
     return (clickPosition: String, instance: { close: Function }) => {
       switch (clickPosition) {
         case "left":
-          console.log("left");
           break;
         case "cell":
-          console.log("cell");
           break;
         case "outside":
-          console.log("outside");
           instance.close();
           break;
         case "right":
-          console.log("right");
           this.$dialog
             .confirm({
-              message: `确定删除${data.title}吗？`
+              message: `Are you sure delete the ${data.title}?`
             })
             .then(() => {
-              this.deleteTodo(data._id).then(() => {
-                this.fetchTodoList().then(() => {
-                  instance.close();
-                });
+              this.deleteTodo(data._id).then((status: boolean) => {
+                instance.close();
               });
+            })
+            .catch(() => {
+              instance.close();
             });
           break;
       }
@@ -105,21 +102,20 @@ export default class TodoList extends Vue {
   }
 
   handleChangeCheckbox(item: any) {
-    this.updateTodo(item).then(() => {
-      this.fetchTodoList();
+    this.updateTodo(item).then((status: boolean) => {
+      if (status === true) {
+        this.fetchTodoList();
+      }
     });
   }
 
   handleSubmitAdd() {
-    this.addTodo(this.addDataTitle).then(() => {
+    this.addTodo(this.addDataTitle).then((status: boolean) => {
       this.addDataTitle = "";
-      this.fetchTodoList();
     });
   }
 
-  created() {
-    this.fetchTodoList();
-  }
+  created() {}
 }
 </script>
 <style lang="scss">
@@ -164,7 +160,5 @@ export default class TodoList extends Vue {
   padding-left: 8px;
   padding-right: 8px;
   line-height: 48px;
-}
-.todo-item-checkbox {
 }
 </style>

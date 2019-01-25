@@ -37,15 +37,28 @@ const actions: ActionTree<ToDoState, RootState> = {
     });
   },
   async [types.ADD_TODO]({ commit, state }, todo) {
-    await Request.todolist.addData(todo).then((result: any) => {
-      state.todoList = result.data;
-    });
+    const result = await Request.todolist.addData(todo);
+    if (result.data) {
+      state.todoList.push(result.data);
+      return true;
+    } else {
+      return false;
+    }
   },
   async [types.UPDATE_TODO]({ commit, state }, todo) {
     await Request.todolist.updateData(todo._id, todo.checked);
   },
-  async [types.DELETE_TODO]({ commit, state }, todo) {
-    await Request.todolist.deleteData(todo).then((result: any) => {});
+  async [types.DELETE_TODO]({ commit, state }, _id) {
+    const result = await Request.todolist.deleteData(_id);
+    if (result.data) {
+      const index = state.todoList.findIndex((item: any) => {
+        return item._id === _id;
+      });
+      state.todoList.splice(index, 1);
+      return true;
+    } else {
+      return false;
+    }
   }
 };
 

@@ -54,9 +54,6 @@ const handleError: any = (error: any) => {
       break;
     case "Error: Request failed with status code 404":
       error = "请求错误，没有发现该网络地址";
-      // router.push({
-      //   name: "404"
-      // });
       break;
     default:
       break;

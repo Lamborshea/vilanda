@@ -7,6 +7,8 @@ import search from "@/router/modules/search";
 import settings from "@/router/modules/settings";
 import music from "@/router/modules/music";
 import video from "@/router/modules/video";
+import login from "@/router/modules/login";
+
 Vue.use(Router);
 
 export default new Router({
@@ -28,6 +30,7 @@ export default new Router({
     ...settings,
     ...video,
     ...music,
+    ...login,
     {
       path: "/about",
       name: "about",
