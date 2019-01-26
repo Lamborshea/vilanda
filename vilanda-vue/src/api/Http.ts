@@ -65,30 +65,20 @@ export default class Http {
    * @returns {Promise<AxiosResponse<any>>}
    */
   static postFile = (url: string, data: any) => {
-    // let params: any = new FormData();
-    // for (let key in data) {
-    //   if (key == "attach") {
-    //     let attachFileName = [];
-    //     for (let i = 0; i < data[key].length; i++) {
-    //       attachFileName.push(data[key][i].name);
-    //       params.append(key, data[key][i]);
-    //     }
-    //     params.append("attachFileName", attachFileName);
-    //   } else {
-    //     params.append(key, data[key]);
-    //   }
-    // }
-
-    // for (let key in data) {
-    //   if (typeof data[key] == "string") {
-    //     data[key] = data[key].trim();
-    //   }
-    // }
+    let params: any = new FormData();
+    for (let key in data) {
+      // let attachFileName = [];
+      // for (let i = 0; i < data[key].length; i++) {
+      //   attachFileName.push(data[key][i].name);
+      //   params.append(key, data[key][i]);
+      // }
+      params.append("attachFileName", data[key]);
+    }
 
     return axios({
       method: "post",
       url: url,
-      data: data,
+      data: params,
       timeout: 30000,
       xhrFields: {
         withCredentials: false
@@ -97,7 +87,8 @@ export default class Http {
       //end 处理跨域代码
       headers: {
         "X-Requested-With": "XMLHttpRequest",
-        "Access-Control-Allow-Headers": "token"
+        "Access-Control-Allow-Headers": "token",
+        "Content-Type": "multipart/form-data"
       }
     });
   };
@@ -107,19 +98,20 @@ export default class Http {
       data = {};
     }
     return axios({
-      method: "post",
+      method: "get",
       url: url,
+      params: data,
       data: JSON.stringify(data),
       timeout: 60000,
       responseType: "blob",
       xhrFields: {
-        withCredentials: true
+        withCredentials: false
       },
-      withCredentials: true,
+      withCredentials: false,
       headers: {
         "X-Requested-With": "XMLHttpRequest",
         "Content-Type": "application/Json; charset=UTF-8",
-        "Access-Control-Allow-Headers": "x-auth-token"
+        "Access-Control-Allow-Headers": "token"
       }
     })
       .then((response: any) => {

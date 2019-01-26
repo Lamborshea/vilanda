@@ -10,12 +10,14 @@
         @change="handleChange"
         type="file"
         accept="image/*"
+        multiple
       >
     </div>
     <van-cell-group class="cell-panel">
       <van-cell title="登录" is-link to="/login"/>
       <van-cell title="注册" is-link to="/register"/>
     </van-cell-group>
+    <a-button type="primary" @click="handleDownload" block>Download</a-button>
   </div>
 </template>
 <script lang="ts">
@@ -40,7 +42,6 @@ export default class Settings extends Vue {
     const inputEl: HTMLElement | null = document.getElementById(
       "js-vilanda-avatar-input"
     );
-    console.log();
 
     if (inputEl) {
       inputEl.click();
@@ -48,7 +49,15 @@ export default class Settings extends Vue {
   }
   handleChange(e: any) {
     const files = e.target.files;
-    Http.postFile("/upload/multer", files);
+    console.log(files[0]);
+    if (files) {
+      Http.postFile("/upload/single", files);
+    }
+  }
+  handleDownload() {
+    Http.downloadFile("/download/file", {
+      fileName: "1548463729984-Coldplay.png"
+    });
   }
 }
 </script>
@@ -57,7 +66,7 @@ export default class Settings extends Vue {
   display: flex;
   justify-content: space-between;
   padding: 16px;
-  margin: 16px 8px 0;
+  margin: 16px 16px 0;
   background-color: #fff;
   .user-info {
     height: 64px;

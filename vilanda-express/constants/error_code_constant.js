@@ -1,4 +1,5 @@
 module.exports = {
   SUCCESS: 20000,
-  SYSTEM_EROOR: 90000
+  SYSTEM_EROOR: 90000,
+  UPLOAD_FAILED: 40001
 };

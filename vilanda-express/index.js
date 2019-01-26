@@ -9,7 +9,8 @@ const vueDistPath = path.resolve(__dirname, "../vilanda-vue/dist/");
 const todolist = require("./routes/todolist");
 const loginRoutes = require("./routes/login");
 const uploadRoutes = require("./routes/base/upload");
-
+const downloadRoutes = require("./routes/base/download");
+const fileRoutes = require("./routes/base/file");
 app.use(express.static(vueDistPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,6 +45,9 @@ app.get("/", function(req, res, next) {
 app.use("/todolist", todolist);
 app.use("/login", loginRoutes);
 app.use("/upload", uploadRoutes);
+app.use("/download", downloadRoutes);
+app.use("/file", fileRoutes);
+
 app.listen(config.port, () =>
   console.log(`vilanda-express app listening on port ${config.port}!`)
 );
