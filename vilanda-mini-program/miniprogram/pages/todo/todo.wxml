@@ -1,0 +1,18 @@
+<!--miniprogram/pages/todo/todo.wxml-->
+<view>
+
+  <!-- 待办列表 -->
+  <van-swipe-cell class="todo-item-swipe-cell" wx:for="{{todoList}}" wx:key="item._id" right-width="65" left-width="0" async-close bind:close="hanldeCloseSwipteCell" id="{{item._id}}" data-index="{{index}}">
+    <van-cell-group class="todo-item-cell-group">
+      <van-checkbox value="{{item.checked}}" id="{{item._id}}" data-index="{{index}}" bind:change="handleChangeCheckbox" class="todo-item-checkbox van-ellipsis van-hairline--bottom">{{item.title}}</van-checkbox>
+    </van-cell-group>
+    <span class="swipe-slot-right" slot="right">删除</span>
+  </van-swipe-cell>
+  <van-cell-group>
+
+    <!-- 新增输入框 -->
+    <van-field class="todo-add-input" value="{{ todoTitle }}" bind:input="handleInput" center clearable label="Todo" placeholder="Add a TODO" border="{{ false }}" use-button-slot>
+      <van-button bind:click="handleAdd" slot="button" size="small" type="primary">Add</van-button>
+    </van-field>
+  </van-cell-group>
+</view>

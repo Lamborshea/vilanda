@@ -1,0 +1,28 @@
+/* miniprogram/pages/todo/todo.wxss */
+.todo-item-swipe-cell .van-swipe-cell{
+  
+  box-sizing: border-box;
+}
+
+.todo-item-cell-group {
+  box-sizing: border-box;
+}
+
+.todo-item-checkbox .van-checkbox{
+  box-sizing: border-box;
+  height: 112rpx;
+  line-height: 112rpx;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+}
+
+.todo-item-swipe-cell .swipe-slot-right {
+  height: 112rpx;
+  line-height: 112rpx;
+  color: #ff4d4f;
+}
+
+.todo-add-input .van-cell,
+.todo-add-input .van-field__body {
+  
+}

@@ -1633,6 +1633,11 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+vant-weapp@^0.5.2:
+  version "0.5.2"
+  resolved "http://registry.npm.taobao.org/vant-weapp/download/vant-weapp-0.5.2.tgz#c9dd29f53f5871c0a6b19353e1ecb2f0cc69858f"
+  integrity sha1-yd0p9T9YccCmsZNT4eyy8MxphY8=
+
 vuex-class@^0.3.1:
   version "0.3.1"
   resolved "http://registry.npm.taobao.org/vuex-class/download/vuex-class-0.3.1.tgz#3c0b946bcff4cf2be1904de5b0cab1a3dd5c41d5"

@@ -1,0 +1,29 @@
+{
+  "usingComponents": {
+    "van-cell": "./lib/vant-weapp/cell/index",
+    "van-cell-group": "./lib/vant-weapp/cell-group/index",
+    "van-checkbox": "./lib/vant-weapp/checkbox/index",
+    "van-checkbox-group": "./lib/vant-weapp/checkbox-group/index",
+    "van-swipe-cell": "./lib/vant-weapp/swipe-cell/index",
+    "van-field": "./lib/vant-weapp/field/index",
+    "van-button": "./lib/vant-weapp/button/index"
+  },
+  "pages": [
+    "pages/index/index",
+    "pages/todo/todo",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "backgroundColor": "#f0f2f5",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f0f2f5",
+    "navigationBarTitleText": "Vilanda",
+    "navigationBarTextStyle": "black"
+  }
+}
