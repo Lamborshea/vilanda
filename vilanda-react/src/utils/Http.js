@@ -48,8 +48,8 @@ export default class Http {
     return new Promise(function(resolve, reject) {
       fetch(url, {
         method: "POST",
-        headers: headers,
-        body: data
+        headers: { "Content-Type": "application/json", ...headers },
+        body: JSON.stringify(data)
       })
         .then(response => {
           if (response.ok) {

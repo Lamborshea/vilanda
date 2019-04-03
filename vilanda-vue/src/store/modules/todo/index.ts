@@ -26,7 +26,9 @@ const getters: GetterTree<ToDoState, RootState> = {
 };
 
 const mutations: MutationTree<ToDoState> = {
-  [types.ADD_TODO](ToDoState, payload) {}
+  [types.ADD_TODO](ToDoState, payload) {
+    console.log("1111");
+  }
 };
 
 const actions: ActionTree<ToDoState, RootState> = {
@@ -36,7 +38,8 @@ const actions: ActionTree<ToDoState, RootState> = {
       state.todoList = result.data;
     });
   },
-  async [types.ADD_TODO]({ commit, state }, todo) {
+  async [types.ADD_TODO]({ commit: commit, state: state }, todo) {
+    commit("addTodo");
     const result = await Request.todolist.addData(todo);
     if (result.data) {
       state.todoList.push(result.data);
@@ -48,7 +51,7 @@ const actions: ActionTree<ToDoState, RootState> = {
   async [types.UPDATE_TODO]({ commit, state }, todo) {
     await Request.todolist.updateData(todo._id, todo.checked);
   },
-  async [types.DELETE_TODO]({ commit, state }, _id) {
+  async [types.DELETE_TODO]({ commit: commit, state: state }, _id) {
     const result = await Request.todolist.deleteData(_id);
     if (result.data) {
       const index = state.todoList.findIndex((item: any) => {

@@ -1,26 +1,25 @@
 import React, { Component } from "react";
 // import logo from "./logo.svg";
+
+import Tabbar from "./components/tabbar/index";
 import "./App.css";
-import TodoList from "./pages/todolist/TodoList";
+
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      tabs: [
+        { label: "Todo", icon: "check-circle-o", to: "/todo" },
+        { label: "Tmall", icon: "check-circle-o", to: "/" },
+        { label: "Wechat", icon: "check-circle-o", to: "/" },
+        { label: "Settings", icon: "ellipsis", to: "/setting" }
+      ]
+    };
+  }
   render() {
     return (
       <div className="App">
-        <TodoList />
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header> */}
+        <Tabbar tabs={this.state.tabs} fixed />
       </div>
     );
   }

@@ -17,9 +17,9 @@ async function addData(title = "") {
     const response = await Http.post(Url.todolist.addTodo, {
       title
     });
-    const result = response.data;
+    const result = response;
     if (result.code === Code.SUCCESS) {
-      return result;
+      return result.data;
     } else {
       return false;
     }
@@ -34,7 +34,7 @@ async function updateData(_id = "", checked = false) {
       _id,
       checked
     });
-    const result = response.data;
+    const result = response;
     if (result.code === Code.SUCCESS) {
       return true;
     } else {
@@ -50,9 +50,9 @@ async function deleteData(_id = "") {
     const response = await Http.post(Url.todolist.deleteTodo, {
       _id
     });
-    const result = response.data;
+    const result = response;
     if (result.code === Code.SUCCESS) {
-      return result;
+      return result.data;
     } else {
       return false;
     }

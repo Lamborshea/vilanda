@@ -7,7 +7,7 @@ class TodoItem extends Component {
 
   render() {
     return (
-      <div className="todo-item">
+      <div className="todo-item" draggable={this.props.draggable}>
         <input
           type="checkbox"
           checked={this.props.checked}

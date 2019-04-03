@@ -1,0 +1,24 @@
+.todo-list {
+  text-align: left;
+}
+
+.add-btn {
+  width: 80%;
+  margin: 16px auto 0;
+}
+
+.add-input-wrap {
+  padding: 0 16px;
+  margin-top: 16px;
+  background-color: #fff;
+}
+
+.add-input {
+  display: block;
+  height: 40px;
+  line-height: 1;
+  width: 100%;
+  padding: 4px 0;
+  border: 0;
+  background-color: transparent;
+}
