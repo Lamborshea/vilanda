@@ -1,14 +1,33 @@
 import React, { Component } from "react";
-// import TodoItem from "./TodoItem";
+import { connect } from "react-redux";
+import { Store } from "redux";
 import Api from "../../api/index";
 import "./todolist.css";
+import PropTypes from "prop-types";
+import { actions } from "../../redux/modules/todo";
+import { bindActionCreators } from "redux";
+import { getTodoListSelector } from "../../redux/modules/todo";
 import { Button, List, Checkbox, SwipeAction } from "antd-mobile";
 const CheckboxItem = Checkbox.CheckboxItem;
+
 class TodoList extends Component {
-  constructor({ match }) {
-    super();
-    this.state = { todoTitle: "", todolist: [] };
+  constructor(props) {
+    super(props);
+    this.state = { todoTitle: "" };
   }
+
+  getInitialState() {
+    console.log("getInitialState");
+  }
+
+  componentWillReceiveProps() {
+    console.log("componentWillReceiveProps");
+  }
+
+  componentWillMount() {
+    console.log("componentWillMount");
+  }
+
   onChange(todo, event) {
     let result = this.state.todolist;
     result.forEach(item => {
@@ -62,39 +81,50 @@ class TodoList extends Component {
     });
   }
 
+  handleGet = e => {
+    this.props.fetchTodoRequested();
+  };
+
   componentDidMount() {
-    this.getData();
+    // this.props.fetchTodo();
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextState);
+    console.log(nextProps);
+    return true;
+  }
+
   render() {
-    const todolist = this.state.todolist;
+    console.log("render");
+
+    const todolist = this.props.todoList;
     return (
       <div className="todo-list">
         <List renderHeader={() => "TODO list"}>
-          <SwipeAction>
-            {todolist
-              ? todolist.map(i => (
-                  <SwipeAction
-                    key={i._id}
-                    style={{ backgroundColor: "gray" }}
-                    autoClose
-                    right={[
-                      {
-                        text: "Delete",
-                        onPress: () => this.handleDelete(i),
-                        style: { backgroundColor: "#F4333C", color: "white" }
-                      }
-                    ]}
+          {todolist
+            ? todolist.map(i => (
+                <SwipeAction
+                  key={i._id}
+                  style={{ backgroundColor: "gray" }}
+                  autoClose
+                  right={[
+                    {
+                      text: "Delete",
+                      onPress: () => this.handleDelete(i),
+                      style: { backgroundColor: "#F4333C", color: "white" }
+                    }
+                  ]}
+                >
+                  <CheckboxItem
+                    checked={i.checked}
+                    onChange={event => this.onChange(i, event)}
                   >
-                    <CheckboxItem
-                      checked={i.checked}
-                      onChange={event => this.onChange(i, event)}
-                    >
-                      {i.title}
-                    </CheckboxItem>
-                  </SwipeAction>
-                ))
-              : null}
-          </SwipeAction>
+                    {i.title}
+                  </CheckboxItem>
+                </SwipeAction>
+              ))
+            : null}
         </List>
         <div className="add-input-wrap">
           <input
@@ -113,9 +143,36 @@ class TodoList extends Component {
         >
           Add
         </Button>
+        <Button className="add-btn" type="primary" onClick={this.handleGet}>
+          GET
+        </Button>
       </div>
     );
   }
 }
 
-export default TodoList;
+// const mapStateToProps = state => ({
+// });
+function mapStateToProps(state) {
+  const list = getTodoListSelector(state);
+  return {
+    todoList: list
+  };
+}
+
+TodoList.propTypes = {
+  fetchTodoRequested: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchTodoRequested() {
+      dispatch(actions.fetchTodoRequested());
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);

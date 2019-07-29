@@ -1,5 +1,6 @@
 import "whatwg-fetch";
 import { API_URL } from "../config";
+import * as Code from "../api/Code";
 export default class Http {
   /**
    * 基于 fetch 封装的 GET请求
@@ -59,7 +60,11 @@ export default class Http {
           }
         })
         .then(response => {
-          resolve(response);
+          response.code === Code.SUCCESS
+            ? resolve(response.data)
+            : reject({
+                status: -1
+              });
         })
         .catch(err => {
           reject({ status: -1 });

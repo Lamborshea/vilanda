@@ -26,7 +26,7 @@ module.exports = {
     host: "0.0.0.0",
     port: 4002,
     https: false,
-    hotOnly: true
+    hotOnly: true,
   },
   css: {
     loaderOptions: {

@@ -3,13 +3,8 @@ import * as Code from "./../../Code";
 import Url from "../../url";
 
 async function getData() {
-  try {
-    const response = await Http.post(Url.todolist.getTodo);
-    const result = response.data;
-    return result;
-  } catch (error) {
-    return error;
-  }
+  const response = await Http.post(Url.todolist.getTodo);
+  return response;
 }
 
 async function addData(title = "") {
@@ -28,9 +23,9 @@ async function addData(title = "") {
   }
 }
 
-async function updateData(_id = "", checked = false) {
+function* updateData(_id = "", checked = false) {
   try {
-    const response = await Http.post(Url.todolist.updateTodo, {
+    const response = yield Http.post(Url.todolist.updateTodo, {
       _id,
       checked
     });
